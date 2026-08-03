@@ -1,6 +1,6 @@
 export class Libro {
 
-    isbn: number;
+    isbn: string;
     titulo: string;
     autor: string
     editorial: string;
@@ -10,7 +10,7 @@ export class Libro {
     imagen: string;
     stock: number;
     constructor(
-        isbn: number,
+        isbn: string,
         titulo: string,
         autor: string,
         editorial: string,
