@@ -11,7 +11,7 @@ export class Usuario {
     nombre: string,
     correoElectronico: string,
     contrasena: string,
-    direccion: string
+    direccion: string,
   ) {
 
     this.id = id;
