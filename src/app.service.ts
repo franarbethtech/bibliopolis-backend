@@ -2,12 +2,16 @@ import {  BadRequestException, NotFoundException, Injectable } from '@nestjs/com
 import { Usuario } from './models/usuario';
 import { UsuarioResponseDto } from './dtos/usuario-response.dto';
 import { Libro } from './models/libro';
+import { ApiProperty } from '@nestjs/swagger';
+import { Pedido } from './models/pedido';
 
 @Injectable()
 export class AppService {
   private usuarios: Usuario[] = [];
   private libros: Libro[] = [];
   private ultimoIdUsuario = 0;
+  private pedidos: Pedido[] = [];
+  private ultimoIdPedido = 0;
 
   private convertirId(id: string): number {
   return parseInt(id);
@@ -25,6 +29,7 @@ export class AppService {
     }
     this.ultimoIdUsuario++;
     const nuevoUsuario = new Usuario(
+      
       this.ultimoIdUsuario,
       usuario.nombre,
       usuario.correoElectronico,
@@ -123,5 +128,27 @@ export class AppService {
     }
     this.libros.splice(index, 1);
   }
-  
+
+  crearPedido(pedido: Pedido): Pedido {
+     this.ultimoIdPedido++; 
+    const fechaActual = new Date();
+    const estadoInicial = 'pendiente';
+
+    const nuevoPedido = new Pedido(
+      this.ultimoIdPedido,
+      pedido.idUsuario,
+      fechaActual,
+      estadoInicial,
+      pedido.total,
+      pedido.items
+    );
+    this.pedidos.push(nuevoPedido);
+    return nuevoPedido;
+  }
 }
+
+
+      
+  
+  
+
